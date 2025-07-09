@@ -10,3 +10,5 @@
 `pip freeze > requirements.txt`
 
 `streamlit run app.py`
+
+App is deployed at: https://customer-review-bot.streamlit.app/
