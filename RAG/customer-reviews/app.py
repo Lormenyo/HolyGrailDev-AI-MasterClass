@@ -12,8 +12,13 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+# Get the directory where your script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Construct the full path to reviews.txt
+reviews_path = os.path.join(script_dir, "reviews.txt")
+
 # Load and embed
-loader = TextLoader("reviews.txt")
+loader = TextLoader(reviews_path)
 docs = loader.load()
 db = Chroma.from_documents(docs, HuggingFaceEmbeddings())
 
