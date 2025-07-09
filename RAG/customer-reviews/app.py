@@ -20,11 +20,7 @@ reviews_path = os.path.join(script_dir, "reviews.txt")
 # Load and embed
 loader = TextLoader(reviews_path)
 docs = loader.load()
-db = Chroma.from_documents(docs, HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2",  # Smaller, more efficient model
-    model_kwargs={"device": "cpu"},  # Force CPU usage
-    encode_kwargs={"normalize_embeddings": True} 
-))
+db = Chroma.from_documents(docs, HuggingFaceEmbeddings())
 
 qa_chain = RetrievalQA.from_chain_type(
     llm=ChatOpenAI(
