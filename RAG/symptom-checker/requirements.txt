@@ -144,7 +144,7 @@ tokenizers==0.13.3
 toml==0.10.2
 tomli==2.2.1
 torch==2.7.1
-torchvision==0.15.2
+torchvision==0.22.1
 tornado==6.5.1
 tqdm==4.67.1
 transformers==4.30.2
