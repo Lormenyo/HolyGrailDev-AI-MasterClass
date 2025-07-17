@@ -5,10 +5,8 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]  # Load API key from Streamlit secrets
 
 # Get the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
