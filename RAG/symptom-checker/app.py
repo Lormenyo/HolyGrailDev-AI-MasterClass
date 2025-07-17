@@ -4,11 +4,8 @@ import openai
 import numpy as np
 import streamlit as st
 from medical_data import docs
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]  # Load API key from Streamlit secrets
 
 # Initialize OpenAI client
 client = openai.OpenAI(api_key=OPENAI_API_KEY,
