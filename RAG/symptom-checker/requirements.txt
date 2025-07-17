@@ -19,6 +19,7 @@ chardet==5.2.0
 charset-normalizer==3.4.2
 chromadb==1.0.15
 click==8.2.1
+cmake==4.0.3
 coloredlogs==15.0.1
 cryptography==45.0.5
 dataclasses-json==0.6.7
