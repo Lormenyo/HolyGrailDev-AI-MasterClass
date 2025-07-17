@@ -11,4 +11,7 @@
 
 `streamlit run app.py`
 
-App is deployed at: https://customer-review-bot.streamlit.app/
+# Apps Deployed 
+Customer Reviews Bot: App is deployed at: https://customer-review-bot.streamlit.app/
+
+Symptom Checker: App is deployed at: https://symptom-checker-hgd.streamlit.app/
