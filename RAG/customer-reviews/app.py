@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 from langchain.document_loaders import TextLoader
 from langchain.vectorstores import Chroma
@@ -9,7 +8,6 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Get the directory where your script is located
