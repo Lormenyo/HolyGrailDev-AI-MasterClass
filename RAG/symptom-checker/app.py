@@ -15,16 +15,16 @@ client = openai.OpenAI(api_key=OPENAI_API_KEY,
 model = SentenceTransformer("all-MiniLM-L6-v2")
 doc_embeddings = model.encode(docs)
 
-
+# Retriever Agent
+# 4. Function to retrieve context based on user input
 def retrieve_context(query, top_k=2):
     query_embedding = model.encode([query])
     similarities = cosine_similarity(query_embedding, doc_embeddings)[0]
     top_indices = np.argsort(similarities)[-top_k:][::-1]
     return [docs[i] for i in top_indices]
 
+# Explanation Agent
 # 5. Function to call OpenAI (explanation generation)
-
-
 def generate_explanation(symptoms, context):
     prompt = f"""
     You are a helpful medical assistant. A user described their symptoms as: {symptoms}
@@ -42,7 +42,7 @@ def generate_explanation(symptoms, context):
     )
     return response.choices[0].message.content
 
-
+# Symptom Checker Agent
 # 🔍 Test with user input
 st.title("💬 Tell Me About Your Symptoms")
 user_input = st.text_input("Eg: I have chest pain and it gets worse when I breathe")
