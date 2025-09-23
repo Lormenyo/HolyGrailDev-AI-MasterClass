@@ -3,7 +3,6 @@ from openai import OpenAI
 import moondream as md
 from PIL import Image
 
-# Set up API key
 # Load API key from Streamlit secrets
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
