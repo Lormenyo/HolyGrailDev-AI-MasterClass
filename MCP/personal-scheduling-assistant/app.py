@@ -1,15 +1,24 @@
 import streamlit as st
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-import openai
+from openai import OpenAI
 import datetime
 import json
+
+today = datetime.datetime.now().strftime("%Y-%m-%d")
+
+# Load API key from Streamlit secrets
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+
+# Initialize OpenAI client
+client = OpenAI(api_key=OPENAI_API_KEY,
+                base_url="https://openrouter.ai/api/v1",)
 
 # -----------------------
 # GOOGLE CALENDAR SETUP
 # -----------------------
 SCOPES = ['https://www.googleapis.com/auth/calendar']
-SERVICE_ACCOUNT_FILE = 'credentials.json'  # replace with your service account file
+SERVICE_ACCOUNT_FILE = '../../credentials.json'  
 
 creds = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -61,8 +70,8 @@ if st.button("Generate & Add Weekly Plan"):
     # -----------------------
     st.write("🧠 Generating your structured weekly plan with AI...")
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",  
+    response = client.chat.completions.create(
+        model="mistralai/mistral-7b-instruct",
         messages=[
             {"role": "system", "content": "You are a helpful scheduling assistant."},
             {"role": "user", "content": f"My weekly goals: {weekly_goals}. "
@@ -73,7 +82,8 @@ if st.button("Generate & Add Weekly Plan"):
     )
 
     try:
-        plan_json = response.choices[0].message["content"]
+        plan_json = response.choices[0].message.content
+        print("AI Response:", plan_json)  # Debugging line
         plan = json.loads(plan_json)  # Expecting JSON from AI
     except Exception as e:
         st.error("⚠️ Could not parse AI response as JSON. Check output.")
