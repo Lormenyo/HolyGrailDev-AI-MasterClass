@@ -7,7 +7,6 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-
 # Load API key from Streamlit secrets
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
@@ -55,7 +54,7 @@ if st.button("Generate & Add Weekly Plan"):
                   datetime.timedelta(days=7)).isoformat() + 'Z'
 
     events_result = service.events().list(
-        calendarId='primary', timeMin=now,
+        calendarId='lormenyo.dev@gmail.com', timeMin=now,
         timeMax=week_later, singleEvents=True,
         orderBy='startTime').execute()
     events = events_result.get('items', [])
