@@ -16,16 +16,16 @@ service = build('calendar', 'v3', credentials=creds)
 
 
 class CreateEventRequest(BaseModel):
-    summary: str
-    start: str  # ISO datetime
-    end: str
+    summary: str = "Title of the Event"
+    start: str  =  datetime.datetime.utcnow().isoformat() + 'Z'  # ISO datetime
+    end: str = datetime.datetime.utcnow().isoformat() + 'Z'  # ISO datetime
     calendarId: str
     timeZone: str = "Europe/Dublin"
 
 class ListEventsRequest(BaseModel):
-    calendarId: str
-    timeMin: str  # ISO datetime
-    timeMax: str  # ISO datetime
+    calendarId: str = 'lormenyo.dev@gmail.com'
+    timeMin: str = datetime.datetime.utcnow().isoformat() + 'Z'  # ISO datetime
+    timeMax: str = (datetime.datetime.utcnow() + datetime.timedelta(days=7)).isoformat() + 'Z'  # ISO datetime
 
 @app.post("/create_event")
 def create_event(req: CreateEventRequest):
